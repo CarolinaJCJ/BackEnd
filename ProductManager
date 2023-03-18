@@ -1,0 +1,67 @@
+const products = {
+    title: 'Tintas Intenze',
+    description:'Set tinta de colores marca Intenze',
+    price: 97.85,
+    thumbnail: 'imagen por definir',
+    code: 18940,
+    stock:3
+
+}
+
+//console.log (products.title)
+
+class ProductManager {
+    constructor() {
+        this.products = []
+
+    }
+
+    static id= 1
+
+addProduct (products) {
+    const code = this.products.find (p => p.code === products.code)
+    if(code === undefined) {
+    
+     this.products.push (products)
+    products.id = ProductManager.id++
+    console.log("Producto agregado exitosamente");
+   } else {
+    console.log("El código del producto ya existe");
+   }
+    
+    if(products.title && products.description && products.price && products.thumbnail && products.code 
+        && products.stock){
+
+    } else {
+        return 'Campos obligatorios requeridos'
+
+    }
+   
+      
+}
+
+//Buscar dentro del arreglo por su id
+getProductById(id) {
+    const product = this.products.find (p => p.id === id)
+   
+     
+     if (!product) { return 'NOT FOUND'}
+     return product
+}
+getProducts() 
+{return this.products}
+
+}
+
+//Agregar producto
+const manager = new ProductManager()
+manager.addProduct(products)
+manager.addProduct({title:'Taburete Tattoo', description:'taburete ajustable', price: 31.25, thumbnail:'imag por definir', code:2006, stock: 1})
+//objeto repetido
+manager.addProduct({title:'Taburete Tattoo', description:'taburete ajustable', price: 31.25, thumbnail:'imag por definir', code:2006, stock: 1})
+//NOT FOUND
+console.log( manager.getProductById(12))
+//llamado id especifico
+console.log (manager.getProductById(1))
+//Todos los productos
+console.log (manager.getProducts())
